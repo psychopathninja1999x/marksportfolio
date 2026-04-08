@@ -27,7 +27,13 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="relative min-h-full bg-transparent">
+        {/* Same space palette as the canvas — stays visible when routes translate */}
+        <div className="app-galaxy-shell" aria-hidden />
+        <div className="relative z-[1] flex min-h-full flex-1 flex-col">
+          {children}
+        </div>
+      </body>
     </html>
   );
 }

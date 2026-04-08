@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #030408;
+  --foreground: #e8eaef;
 }
 
 @theme inline {
@@ -12,15 +12,292 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  min-height: 100%;
+  background-color: #030408;
 }
 
 body {
-  background: var(--background);
+  background: transparent;
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Fixed nebula base — matches ConstellationBackground drawGalaxyBackdrop */
+.app-galaxy-shell {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse 95% 90% at 38% 22%,
+      #2d2d5c 0%,
+      #18182f 22%,
+      #0c1022 48%,
+      #030408 100%
+    ),
+    radial-gradient(
+      ellipse 70% 55% at 78% 72%,
+      rgba(90, 50, 120, 0.38) 0%,
+      rgba(30, 20, 50, 0.12) 52%,
+      transparent 72%
+    ),
+    linear-gradient(
+      165deg,
+      rgba(20, 60, 90, 0.22) 0%,
+      transparent 48%
+    ),
+    #030408;
+}
+
+@keyframes galaxy-name-gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Moving nebula-style gradient on "Mark" — wide BG scrolls behind clipped text */
+.galaxy-name-gradient {
+  background-image: linear-gradient(
+    90deg,
+    #e9d5ff 0%,
+    #c4b5fd 14%,
+    #a78bfa 28%,
+    #67e8f9 42%,
+    #22d3ee 50%,
+    #67e8f9 58%,
+    #a78bfa 72%,
+    #c4b5fd 86%,
+    #e9d5ff 100%
+  );
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: galaxy-name-gradient-shift 8s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .galaxy-name-gradient {
+    animation: none;
+    background-position: 50% 50%;
+  }
+}
+
+@keyframes typewriter-cursor-blink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.rotating-role-wrap {
+  filter: drop-shadow(0 0 18px rgba(103, 232, 249, 0.22));
+}
+
+.rotating-role-text {
+  display: inline;
+  background-image: linear-gradient(
+    115deg,
+    #a5f3fc 0%,
+    #c4b5fd 35%,
+    #e879f9 65%,
+    #67e8f9 100%
+  );
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: galaxy-name-gradient-shift 10s linear infinite;
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.05em;
+  margin-left: 1px;
+  vertical-align: -0.12em;
+  border-radius: 1px;
+  background: linear-gradient(180deg, #a5f3fc 0%, #e879f9 100%);
+  box-shadow: 0 0 10px rgba(103, 232, 249, 0.65);
+  animation: typewriter-cursor-blink 0.95s step-end infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rotating-role-text {
+    animation: none;
+    background-position: 40% 50%;
+  }
+
+  .typewriter-cursor {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+@keyframes works-landing-in {
+  from {
+    opacity: 0;
+    transform: translateY(-18px);
+    filter: blur(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.works-landing {
+  animation: works-landing-in 0.95s cubic-bezier(0.22, 0.9, 0.36, 1) 0.08s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .works-landing {
+    animation: none;
+  }
+}
+
+/* Floating astronaut — slow zero-g tilt + drift (position path is JS-driven) */
+@keyframes astronaut-drift-wobble {
+  0%,
+  100% {
+    transform: rotate(-6deg) scale(1);
+  }
+  33% {
+    transform: rotate(5deg) scale(1.03);
+  }
+  66% {
+    transform: rotate(-3deg) scale(0.98);
+  }
+}
+
+.astronaut-float-drift {
+  animation: astronaut-drift-wobble 18s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .astronaut-float-drift {
+    animation: none;
+  }
+}
+
+/* About section — astronaut morphs from “distant” to full hero size */
+@keyframes about-astro-morph-in {
+  0% {
+    opacity: 0.12;
+    transform: scale(0.18);
+    filter: blur(24px);
+  }
+  40% {
+    opacity: 1;
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+.about-astro-morph {
+  transform-origin: center center;
+  opacity: 0;
+  transform: scale(0.22);
+  filter: blur(18px);
+}
+
+.about-astro-morph--visible {
+  animation: about-astro-morph-in 1.15s cubic-bezier(0.18, 0.82, 0.22, 1) forwards;
+}
+
+/* After FLIP flight lands — no keyframe, image is already full size */
+.about-astro-morph--landed {
+  opacity: 1;
+  transform: none;
+  filter: none;
+  animation: none;
+}
+
+/* About astro2 — gentle levitation (zero-g) */
+@keyframes about-astro-levitate {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  25% {
+    transform: translate3d(5px, -12px, 0);
+  }
+  50% {
+    transform: translate3d(-4px, -18px, 0);
+  }
+  75% {
+    transform: translate3d(3px, -8px, 0);
+  }
+}
+
+.about-astro-levitate {
+  animation: about-astro-levitate 5.2s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes about-copy-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.about-copy-reveal {
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+.about-copy-reveal--visible .about-copy-reveal:nth-child(1) {
+  animation: about-copy-rise 0.75s cubic-bezier(0.22, 0.9, 0.36, 1) 0.42s forwards;
+}
+
+.about-copy-reveal--visible .about-copy-reveal:nth-child(2) {
+  animation: about-copy-rise 0.78s cubic-bezier(0.22, 0.9, 0.36, 1) 0.55s forwards;
+}
+
+.about-copy-reveal--visible .about-copy-reveal:nth-child(3) {
+  animation: about-copy-rise 0.8s cubic-bezier(0.22, 0.9, 0.36, 1) 0.68s forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-astro-morph,
+  .about-astro-morph--visible,
+  .about-astro-morph--landed {
+    animation: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+  }
+
+  .about-astro-levitate {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .about-copy-reveal,
+  .about-copy-reveal--visible .about-copy-reveal {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
