@@ -1,5 +1,10 @@
 import Link from "next/link";
-import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaDownload, FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
+
+/** File in /public — served at root */
+const RESUME_FILENAME = "Mark Vincent Faith Item - RESUME .pdf";
+const RESUME_HREF = `/${encodeURIComponent(RESUME_FILENAME)}`;
+const RESUME_DOWNLOAD_AS = "Mark-Vincent-Faith-Item-Resume.pdf";
 
 /** Edit these for your live portfolio */
 const EMAIL = "mvitem5@gmail.com";
@@ -34,6 +39,14 @@ export function ContactOutreach() {
             aria-hidden
           />
           <span>{EMAIL}</span>
+        </a>
+        <a
+          href={RESUME_HREF}
+          download={RESUME_DOWNLOAD_AS}
+          className="group inline-flex items-center gap-3 rounded-xl border border-cyan-400/30 bg-white/[0.04] px-5 py-3.5 text-sm font-medium text-cyan-100 transition hover:border-cyan-300/45 hover:bg-white/[0.07]"
+        >
+          <FaDownload className="h-5 w-5 text-cyan-300/90" aria-hidden />
+          <span>Download résumé</span>
         </a>
       </div>
 
