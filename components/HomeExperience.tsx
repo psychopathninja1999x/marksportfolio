@@ -12,6 +12,7 @@ import {
   type Rect,
 } from "@/components/AstronautMorphFlight";
 import { FloatingAstronaut } from "@/components/FloatingAstronaut";
+import { FloatingCapybara } from "@/components/FloatingCapybara";
 import { RotatingRoles } from "@/components/RotatingRoles";
 import { ContactOutreach } from "@/components/ContactOutreach";
 import { ProjectPreviewCard } from "@/components/ProjectPreviewCard";
@@ -287,6 +288,11 @@ export function HomeExperience() {
       <ConstellationBackground
         launchPhase={launchPhase}
         position="fixed"
+      />
+      <FloatingCapybara
+        suppress={
+          aboutInView || !!flight || contactInView || !!contactFlight
+        }
       />
       <FloatingAstronaut
         ref={floaterMountRef}
