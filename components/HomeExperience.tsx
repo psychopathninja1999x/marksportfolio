@@ -395,7 +395,7 @@ export function HomeExperience() {
                   Mark Vincent Faith Item
                 </span>
                 , a Software Developer focused on building impactful digital
-                solutions—from software design and web applications to mobile
+                solutions from software design and web applications to mobile
                 development and beyond.
               </p>
               <p className="text-[0.95rem] leading-relaxed text-[#94a3b8] md:text-base">
@@ -491,8 +491,7 @@ export function HomeExperience() {
               <span className="galaxy-name-gradient font-semibold">My Works</span>
             </h2>
             <p className="mt-6 max-w-lg text-pretty text-base text-[#94a3b8] md:text-lg">
-              Everything lives on this page — open a project for the full case
-              study on its own route.
+              Explore my featured work below, or dive deeper into any project to view its story and technical breakdown.
             </p>
           </div>
 
